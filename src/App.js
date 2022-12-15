@@ -6,17 +6,27 @@ import ToDoList from "./components/todoListPage";
 export default function App() {
   const [userName, setUserName] = React.useState("");
 
+  const [errorMessage, setErrorMessage] = React.useState("");
   /**
    * Updates the username
    * @param {Event} event The event object passed when the task is submitted
    */
   const handleSubmit = (event) => {
     event.preventDefault();
-    setUserName(event.target[0].value);
+
+    let username = event.target[0].value;
+
+    if (/^[a-zA-Z\-]+$/.test(username)) {
+      setUserName(username);
+      setErrorMessage("");
+    }
+    else
+      setErrorMessage("The username should contain only capital and small letters")
   }
-
-
   return (
-    userName === "" ? <Welcome handleSubmit={handleSubmit} /> : <ToDoList userName={userName} />
+    errorMessage !== "" || userName === "" ?
+      <><Welcome handleSubmit={handleSubmit} /> <p >{errorMessage}</p></>
+      :
+      <ToDoList userName={userName} />
   );
 }
