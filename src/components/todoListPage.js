@@ -1,5 +1,7 @@
 import React from "react"
 import { nanoid } from "nanoid";
+import { FaPencilAlt } from 'react-icons/fa';
+import { AiFillDelete } from 'react-icons/ai';
 
 export default function ToDoList(props) {
 
@@ -8,6 +10,12 @@ export default function ToDoList(props) {
 
     // Contains the to dos in the html
     const [display, setDisplay] = React.useState([]);
+
+    function handleDelete(id) {
+        updateToDoist(todos => delete todos[id]);
+
+        setDisplay(todoDisplay => { return todoDisplay.filter(todoElement => todoElement.key !== id) })
+    }
 
     function addToDO(event) {
         event.preventDefault();
@@ -23,8 +31,8 @@ export default function ToDoList(props) {
 
         // updataing the previous values
         setDisplay(prevDisplay => {
-            let newDisplay = [<li key={uniqueID}>{entry}</li>];
-            return [ ...newDisplay, ...prevDisplay ]
+            let newDisplay = [<li key={uniqueID}>{entry} <AiFillDelete onClick={() => handleDelete(uniqueID)} /> <FaPencilAlt /> </li>];
+            return [...newDisplay, ...prevDisplay]
         })
 
         // clearing the previous input
