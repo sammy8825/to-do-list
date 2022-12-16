@@ -2,6 +2,7 @@ import React from "react"
 import { nanoid } from "nanoid";
 import { FaPencilAlt } from 'react-icons/fa';
 import { AiFillDelete } from 'react-icons/ai';
+import { BiCalendarCheck } from 'react-icons/bi';
 
 import Update from "./updateToDo";
 
@@ -61,7 +62,12 @@ export default function ToDoList(props) {
         // updataing the previous values
         setDisplay(prevDisplay => {
             let newDisplay = [
-                <li key={uniqueID}>{entry} <AiFillDelete onClick={() => handleDelete(uniqueID)} /> <FaPencilAlt onClick={() => handleUpdate(uniqueID)} /> </li>
+                <li key={uniqueID}>
+                    <button className="completed"><BiCalendarCheck /></button>
+                    {entry}
+                    <AiFillDelete onClick={() => handleDelete(uniqueID)} />
+                    <FaPencilAlt onClick={() => handleUpdate(uniqueID)} />
+                </li>
             ];
             return [...newDisplay, ...prevDisplay]
         })
@@ -90,7 +96,7 @@ export default function ToDoList(props) {
                             <input type="text" required placeholder="Add a To Do" />
                             <input type="submit" value="Add To Do" />
                         </form>
-                        <ul>
+                        <ul className="pending">
                             {display}
                         </ul>
                     </div>
