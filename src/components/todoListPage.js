@@ -26,11 +26,16 @@ export default function ToDoList(props) {
      */
     function handleDelete(id) {
         updateToDoList(todos => {
+            if (todos[id].didComplete) {
+                updateCompletedTasks(completedToDo => { return completedToDo.filter(todo => todo.key !== id) })
+            } else {
+                updatePendingTasks(pendingToDo => { return pendingToDo.filter(todo => todo.key !== id) })
+            }
+
             delete todos[id]
+
             return todos
         });
-
-        updatePendingTasks(pendingToDo => { return pendingToDo.filter(todo => todo.key !== id) })
     }
 
     /**
@@ -59,9 +64,9 @@ export default function ToDoList(props) {
 
             let task = <li key={id}>
                 <button className="completed" onClick={() => handleCompletion(id)}><BiCalendarCheck /></button>
-                {todos[id].task}
+                <p>{todos[id].task}</p>
                 <AiFillDelete onClick={() => handleDelete(id)} />
-                <FaPencilAlt onClick={() => handleUpdate(id)} />
+                {(todos[id].didComplete) ? "" : <FaPencilAlt onClick={() => handleUpdate(id)} />}
             </li>
 
             if (todos[id].didComplete) {
@@ -106,7 +111,7 @@ export default function ToDoList(props) {
             return [
                 <li key={uniqueID}>
                     <button className="completed" onClick={() => handleCompletion(uniqueID)}><BiCalendarCheck /></button>
-                    {entry}
+                    <p>{entry}</p>
                     <AiFillDelete onClick={() => handleDelete(uniqueID)} />
                     <FaPencilAlt onClick={() => handleUpdate(uniqueID)} />
                 </li>
@@ -144,11 +149,11 @@ export default function ToDoList(props) {
                             />
                             :
                             <div>
-                                <form onSubmit={addToDO}>
-                                    <input type="text" required placeholder="Add a To Do" />
+                                <form onSubmit={addToDO} className="task-adder">
+                                    <input type="text" required placeholder="Add New Task" />
                                     <input type="submit" value="Add Task" />
                                 </form>
-                                <ul className="pendingTasks">
+                                <ul className="pending-task-list">
                                     {pendingTasks}
                                 </ul>
                             </div>
@@ -156,10 +161,10 @@ export default function ToDoList(props) {
                 </div>
                 <div className="completed-tasks ">
                     <h2>Tasks Completed</h2>
-                    <ul className="completedTasks">
+                    <ul className="completed-task-list">
                         {completedTasks}
                     </ul>
-                    <button onClick={deleteCompleted}>Clear All</button>
+                    {completedTasks.length === 0 ? "" : <button onClick={deleteCompleted}><AiFillDelete />Clear All</button>}
                 </div>
             </div>
         </>

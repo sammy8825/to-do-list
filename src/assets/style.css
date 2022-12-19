@@ -18,14 +18,30 @@ nav span {
   font-style: italic;
 }
 
-nav button {
+.new-user {
   background-color: transparent;
-  border: none;
-  outline: none;
   color: white;
   cursor: pointer;
 
+  padding: 10px;
+  border-radius: 20px;
+
   font-size: 1.2rem;
+}
+
+.new-user:hover {
+  background-color: #01095f;
+}
+
+.intro {
+  text-align: center;
+  font-style: italic;
+}
+
+.error-message {
+  text-align: center;
+  font-style: italic;
+  color: red;
 }
 
 .completed {
@@ -39,11 +55,14 @@ ul li:hover .completed {
 .task-area {
   margin: 1.5rem;
   display: flex;
+  justify-content: space-evenly;
 }
 
 h1 {
   text-align: center;
   text-transform: capitalize;
+
+  margin: 3%;
 }
 
 li {
@@ -52,12 +71,139 @@ li {
 
 .pending-tasks,
 .completed-tasks {
-  border: 1px solid black;
-  width: 50%;
-  
+  width: 40%;
+  padding: 3%;
+  border-radius: 5px;
+  box-shadow: #000222 4px 2px 15px;
+
   text-align: center;
 }
 
-h2{
-    margin: 1.2rem 0;
+.pending-tasks:hover {
+  background: linear-gradient(135deg, #00b7ff, #00348d);
+}
+
+.completed-tasks:hover {
+  background: linear-gradient(135deg, #3cff00, #006735);
+}
+
+h2 {
+  margin: 1.2rem 0;
+}
+
+.username-input {
+  margin: 2.5%;
+  text-align: center;
+}
+
+.new-user,
+.username-input input,
+.task-adder input[type="text"],
+.task-updater input[type="text"],
+.task-adder input[type="submit"],
+.task-updater input[type="submit"],
+.completed-task-list ~ button,
+.completed {
+  border: none;
+  outline: none;
+}
+
+.username-input input {
+  height: 40px;
+}
+
+.username-input input[type="text"] {
+  text-align: center;
+  width: 15%;
+}
+
+.username-input input[type="submit"] {
+  width: 7%;
+  border-radius: 10px;
+}
+
+.task-updater input[type="text"],
+.task-adder input[type="text"] {
+  border-bottom: 1px solid black;
+  padding: 3px 10px;
+
+  background: transparent;
+
+  width: 40%;
+}
+
+.task-updater input[type="submit"],
+.task-adder input[type="submit"] {
+  padding: 6px;
+  width: 15%;
+  border-radius: 7px;
+
+  background: linear-gradient(135deg, #00b7ff, #00348d);
+
+  cursor: pointer;
+}
+
+.pending-tasks:hover .task-adder input[type="submit"] {
+  color: white;
+}
+
+.task-adder input[type="text"]::placeholder {
+  color: black;
+  text-align: center;
+}
+
+.pending-task-list,
+.completed-task-list {
+  margin: 50px auto;
+  width: 70%;
+}
+
+.completed-task-list li p,
+.pending-task-list li p {
+  display: inline-block;
+  width: 85%;
+  padding: 5px 0;
+}
+
+.completed-task-list {
+  margin-bottom: 50px;
+}
+
+.completed-task-list ~ button {
+  width: 40%;
+  padding: 1.5%;
+  border-radius: 5px;
+
+  background: transparent;
+
+  font-size: 16px;
+
+  transition: 0.5s ease-in-out;
+}
+
+.completed-task-list ~ button:hover {
+  color: white;
+  background-color: red;
+
+  cursor: pointer;
+}
+
+.completed {
+  border-radius: 7px;
+
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+
+  font-size: 20px;
+}
+
+.completed-task-list li button {
+  background: transparent;
+  color: red;
+}
+
+.pending-task-list li button {
+  background: transparent;
+  color: #3cff00;
 }

@@ -36,10 +36,10 @@ export default function App() {
       <>
         <nav> <span>TODO</span> </nav>
         <Welcome handleSubmit={handleSubmit} />
-        <p >{errorMessage}</p>
+        <p className="error-message">{errorMessage}</p>
       </>
       : <>
-        <nav> <span>TODO</span> <button onClick={newUser}> <RiUserAddLine /> New User</button></nav>
+        <nav> <span>TODO</span> <button onClick={newUser} className="new-user"> <RiUserAddLine /> New User</button></nav>
         <ToDoList userName={userName} />
       </>
   );

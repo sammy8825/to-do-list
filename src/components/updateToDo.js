@@ -29,11 +29,10 @@ export default function Update(props) {
                 list.forEach(todo => {
 
                     if (todo.key === id) {
-
                         let newToDo = <li key={id}>
                             <button className="completed" onClick={todo.props.children[0].props.onClick}><BiCalendarCheck /></button>
-                            {entry}
-                            <AiFillDelete onClick={todo.props.children[2].props.onClick} />
+                            <p>{entry}</p>
+                            <AiFillDelete onClick={todo.props.children[2].props.onClick}/>
                             {/* taking the on click function directly from the previous list */}
                             <FaPencilAlt onClick={todo.props.children[3].props.onClick} />
                         </li>
@@ -61,7 +60,7 @@ export default function Update(props) {
 
 
     return (
-        <form onSubmit={handleUpdate}>
+        <form onSubmit={handleUpdate} className="task-updater">
             <input type="text" defaultValue={todoList[id].task} required placeholder="Add a To Do" />
             <input type="submit" value="Update" />
         </form>
