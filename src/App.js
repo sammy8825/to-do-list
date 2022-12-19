@@ -20,7 +20,7 @@ export default function App() {
     let username = event.target[0].value;
 
     if (/^[a-zA-Z\-]+$/.test(username)) {
-      setUserName(username);
+      setUserName(username.toLowerCase());
       setErrorMessage("");
     }
     else
